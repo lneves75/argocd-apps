@@ -11,11 +11,11 @@ spec:
       generators:
       - list:
           elements:
-          - namespace: staging
+          - environment: staging
             tag: 9e80cccb0aecc050fa9ed766c0e50266e8e4dc77
-          - namespace: uat
+          - environment: uat
             tag: 9e80cccb0aecc050fa9ed766c0e50266e8e4dc77
-          - namespace: production
+          - environment: production
             tag: 9e80cccb0aecc050fa9ed766c0e50266e8e4dc77
       - git:
           repoURL: https://github.com/lneves75/argocd-apps.git
@@ -24,7 +24,7 @@ spec:
             - path: "apps/"
   template:
     metadata:
-      name: webapp-{{.namespace}}
+      name: webapp-{{.environment}}
       namespace: argocd
     spec:
       project: default
@@ -38,9 +38,11 @@ spec:
             value: '{{ .tag }}'
           valueFiles:
             - https://raw.githubusercontent.com/lneves75/webapp/refs/heads/master/helm/values.yaml
+            - https://raw.githubusercontent.com/lneves75/webapp/refs/heads/master/helm/values-{{ .environment }}.yaml
+          ignoreMissingValueFiles: true
       destination:
         server: https://kubernetes.default.svc
-        namespace: '{{ .namespace }}'
+        namespace: '{{ .environment }}'
       syncPolicy:
         automated:
           prune: true
