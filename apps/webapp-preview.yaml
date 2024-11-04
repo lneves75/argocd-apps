@@ -1,30 +1,26 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: webapp
+  name: webapp-preview
   namespace: argocd
 spec:
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
   generators:
-  - matrix:
-      generators:
-      - list:
-          elements:
-          - namespace: staging
-            tag: 9e80cccb0aecc050fa9ed766c0e50266e8e4dc77
-          - namespace: uat
-            tag: 9e80cccb0aecc050fa9ed766c0e50266e8e4dc77
-          - namespace: production
-            tag: 9e80cccb0aecc050fa9ed766c0e50266e8e4dc77
-      - git:
-          repoURL: https://github.com/lneves75/argocd-apps.git
-          revision: master
-          files:
-            - path: "apps/"
+  - pullRequest:
+      github:
+        # The GitHub organization or user.
+        owner: lneves75
+        # The Github repository
+        repo: webapp
+        # Labels is used to filter the PRs that you want to target. (optional)
+        labels:
+        - built
+        - preview
+      requeueAfterSeconds: 1800
   template:
     metadata:
-      name: webapp-{{.namespace}}
+      name: webapp-{{.number}}
       namespace: argocd
     spec:
       project: default
@@ -35,12 +31,12 @@ spec:
         helm:
           parameters:
           - name: image.tag
-            value: '{{ .tag }}'
+            value: '{{ .head_sha }}'
           valueFiles:
             - https://raw.githubusercontent.com/lneves75/webapp/refs/heads/master/helm/values.yaml
       destination:
         server: https://kubernetes.default.svc
-        namespace: '{{ .namespace }}'
+        namespace: preview
       syncPolicy:
         automated:
           prune: true
