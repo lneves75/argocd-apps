@@ -33,9 +33,7 @@ spec:
           - name: image.tag
             value: '{{ .head_sha }}'
           valueFiles:
-            - https://raw.githubusercontent.com/lneves75/webapp/{{ .head_sha }}/helm/values.yaml
-            - https://raw.githubusercontent.com/lneves75/webapp/{{ .head_sha }}/helm/values-preview.yaml
-          ignoreMissingValueFiles: true
+          - https://raw.githubusercontent.com/lneves75/webapp/{{ .head_sha }}/helm/values.yaml
       destination:
         server: https://kubernetes.default.svc
         namespace: preview
