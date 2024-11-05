@@ -7,21 +7,21 @@ spec:
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
   generators:
-  - matrix:
-      generators:
-      - list:
-          elements:
-          - environment: staging
-            tag: 9e80cccb0aecc050fa9ed766c0e50266e8e4dc77
-          - environment: uat
-            tag: 9e80cccb0aecc050fa9ed766c0e50266e8e4dc77
-          - environment: production
-            tag: 9e80cccb0aecc050fa9ed766c0e50266e8e4dc77
-      - git:
-          repoURL: https://github.com/lneves75/argocd-apps.git
-          revision: master
-          files:
-            - path: "apps/"
+    - matrix:
+        generators:
+          - list:
+              elements:
+                - environment: staging
+                  tag: 474d889dd7ecb34a23d4806456a7a90c7a2c8961
+                - environment: uat
+                  tag: 9e80cccb0aecc050fa9ed766c0e50266e8e4dc77
+                - environment: production
+                  tag: 9e80cccb0aecc050fa9ed766c0e50266e8e4dc77
+          - git:
+              repoURL: https://github.com/lneves75/argocd-apps.git
+              revision: master
+              files:
+                - path: "apps/"
   template:
     metadata:
       name: webapp-{{.environment}}
@@ -34,8 +34,8 @@ spec:
         targetRevision: master
         helm:
           parameters:
-          - name: image.tag
-            value: '{{ .tag }}'
+            - name: image.tag
+              value: '{{ .tag }}'
           valueFiles:
             - https://raw.githubusercontent.com/lneves75/webapp/refs/heads/master/helm/values.yaml
             - https://raw.githubusercontent.com/lneves75/webapp/refs/heads/master/helm/values-{{ .environment }}.yaml
@@ -59,4 +59,3 @@ spec:
             duration: 5s
             factor: 2
             maxDuration: 3m
-
