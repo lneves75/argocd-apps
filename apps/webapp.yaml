@@ -26,6 +26,8 @@ spec:
     metadata:
       name: webapp-{{.environment}}
       namespace: argocd
+      labels:
+        version: '{{ .tag }}'
     spec:
       project: default
       source:
@@ -38,8 +40,6 @@ spec:
               value: '{{ .tag }}'
           valueFiles:
             - https://raw.githubusercontent.com/lneves75/webapp/refs/heads/master/helm/values.yaml
-            - https://raw.githubusercontent.com/lneves75/webapp/refs/heads/master/helm/values-{{ .environment }}.yaml
-          ignoreMissingValueFiles: true
       destination:
         server: https://kubernetes.default.svc
         namespace: '{{ .environment }}'

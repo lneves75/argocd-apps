@@ -22,6 +22,8 @@ spec:
     metadata:
       name: webapp-{{.number}}
       namespace: argocd
+      labels:
+        version: '{{ .head_sha }}'
     spec:
       project: default
       source:
@@ -30,8 +32,8 @@ spec:
         targetRevision: master
         helm:
           parameters:
-          - name: image.tag
-            value: '{{ .head_sha }}'
+            - name: image.tag
+              value: '{{ .head_sha }}'
           valueFiles:
           - https://raw.githubusercontent.com/lneves75/webapp/{{ .head_sha }}/helm/values.yaml
       destination:
