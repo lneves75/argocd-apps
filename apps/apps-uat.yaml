@@ -1,0 +1,46 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: apps-uat
+  namespace: argocd
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/lneves75/argocd-apps.git
+        revision: master
+        files:
+          - path: "apps/uat/"
+  template:
+    metadata:
+      name: '{{ name }}-{{ environment }}'
+    spec:
+      project: '{{ project }}'
+      source:
+        repoURL: https://github.com/lneves75/helm-chart.git
+        path: '.'
+        helm:
+          parameters:
+            - name: image.tag
+              value: '{{ tag }}'
+          valueFiles:
+            - '{{ valueFiles }}'
+      destination:
+        name: '{{ cluster }}'
+        namespace: '{{ namespace }}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+          allowEmpty: false
+        syncOptions:
+          - Validate=false
+          - CreateNamespace=true
+          - PrunePropagationPolicy=foreground
+          - PruneLast=true
+        retry:
+          limit: 5
+          backoff:
+            duration: 5s
+            factor: 2
+            maxDuration: 3m

@@ -1,8 +1,8 @@
 ---
 name: webapp
 project: default
-environment: staging
-namespace: staging
-cluster: https://192.168.67.3:8443
-tag: ab3d1d5db6a8e7ae57900f4b6521817d9a9748f5
+environment: uat
+namespace: uat
+cluster: mini3
+tag: d652f35f0aec515d062790e8188491b6213c3b2f
 valueFiles: https://raw.githubusercontent.com/lneves75/webapp/refs/heads/master/helm/values.yaml
