@@ -13,7 +13,7 @@ spec:
           - path: "apps/staging/"
   template:
     metadata:
-      name: '{{ .name }}-{{ .environment }}'
+      name: '{{ name }}-{{ environment }}'
     spec:
       project: '{{ project }}'
       source:
@@ -22,12 +22,12 @@ spec:
         helm:
           parameters:
             - name: image.tag
-              value: '{{ .tag }}'
+              value: '{{ tag }}'
           valueFiles:
-            - '{{ .valueFiles }}'
+            - '{{ valueFiles }}'
       destination:
-        name: '{{ .cluster }}'
-        namespace: '{{ .namespace }}'
+        name: '{{ cluster }}'
+        namespace: '{{ namespace }}'
       syncPolicy:
         automated:
           prune: true
