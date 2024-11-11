@@ -18,7 +18,7 @@ spec:
                   tag: d652f35f0aec515d062790e8188491b6213c3b2f
                   cluster: https://192.168.67.4:8443
                 - environment: production
-                  tag: 9e80cccb0aecc050fa9ed766c0e50266e8e4dc77
+                  tag: ""
                   cluster: https://192.168.67.5:8443
           - git:
               repoURL: https://github.com/lneves75/argocd-apps.git
