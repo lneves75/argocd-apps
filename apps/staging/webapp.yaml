@@ -4,5 +4,5 @@ project: default
 environment: staging
 namespace: staging
 cluster: mini2
-tag: ab3d1d5db6a8e7ae57900f4b6521817d9a9748f5
+tag: 738125b4df434b6551238659868aef1a3df34cfb
 valueFiles: https://raw.githubusercontent.com/lneves75/webapp/refs/heads/master/helm/values.yaml
