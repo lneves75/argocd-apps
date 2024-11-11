@@ -12,7 +12,7 @@ spec:
           - list:
               elements:
                 - environment: staging
-                  tag: c38068a62e194b3dd8b6fb8929d93e6a6befc1fa
+                  tag: ""
                 - environment: uat
                   tag: 9e80cccb0aecc050fa9ed766c0e50266e8e4dc77
                 - environment: production
