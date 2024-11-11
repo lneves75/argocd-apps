@@ -24,7 +24,7 @@ spec:
             - name: image.tag
               value: '{{ .tag }}'
           valueFiles:
-            - {{ .valueFile }}
+            - '{{ .valueFiles }}'
       destination:
         name: '{{ .cluster }}'
         namespace: '{{ .namespace }}'
