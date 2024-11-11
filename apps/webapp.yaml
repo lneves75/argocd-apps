@@ -7,24 +7,17 @@ spec:
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
   generators:
-    - matrix:
-        generators:
-          - list:
-              elements:
-                - environment: staging
-                  tag: ab3d1d5db6a8e7ae57900f4b6521817d9a9748f5
-                  cluster: https://192.168.67.3:8443
-                - environment: uat
-                  tag: d652f35f0aec515d062790e8188491b6213c3b2f
-                  cluster: https://192.168.67.4:8443
-                - environment: production
-                  tag: ""
-                  cluster: https://192.168.67.5:8443
-          - git:
-              repoURL: https://github.com/lneves75/argocd-apps.git
-              revision: master
-              files:
-                - path: "apps/"
+    - list:
+        elements:
+          - environment: staging
+            tag: ab3d1d5db6a8e7ae57900f4b6521817d9a9748f5
+            cluster: https://192.168.67.3:8443
+          - environment: uat
+            tag: d652f35f0aec515d062790e8188491b6213c3b2f
+            cluster: https://192.168.67.4:8443
+          - environment: production
+            tag: b477634da49df01e2df6929d4a9edca0a3638df1
+            cluster: https://192.168.67.5:8443
   template:
     metadata:
       name: webapp-{{.environment}}
