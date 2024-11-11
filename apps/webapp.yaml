@@ -12,7 +12,7 @@ spec:
           - list:
               elements:
                 - environment: staging
-                  tag: 603ac2d7c1bb5e74611745b1543f0144cdf99ff6
+                  tag: ab3d1d5db6a8e7ae57900f4b6521817d9a9748f5
                   cluster: https://192.168.67.3:8443
                 - environment: uat
                   tag: d652f35f0aec515d062790e8188491b6213c3b2f
