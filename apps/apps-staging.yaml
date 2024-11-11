@@ -15,7 +15,7 @@ spec:
     metadata:
       name: '{{ .name }}-{{ .environment }}'
     spec:
-      project: '{{ .project }}'
+      project: '{{ project }}'
       source:
         repoURL: https://github.com/lneves75/helm-chart.git
         path: '.'
