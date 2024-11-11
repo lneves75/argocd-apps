@@ -12,11 +12,14 @@ spec:
           - list:
               elements:
                 - environment: staging
-                  tag: "603ac2d7c1bb5e74611745b1543f0144cdf99ff6"
+                  tag: 603ac2d7c1bb5e74611745b1543f0144cdf99ff6
+                  cluster: https://192.168.67.3:8443
                 - environment: uat
                   tag: 9e80cccb0aecc050fa9ed766c0e50266e8e4dc77
+                  cluster: https://192.168.67.4:8443
                 - environment: production
                   tag: 9e80cccb0aecc050fa9ed766c0e50266e8e4dc77
+                  cluster: https://192.168.67.5:8443
           - git:
               repoURL: https://github.com/lneves75/argocd-apps.git
               revision: master
@@ -41,7 +44,7 @@ spec:
           valueFiles:
             - https://raw.githubusercontent.com/lneves75/webapp/refs/heads/master/helm/values.yaml
       destination:
-        server: https://kubernetes.default.svc
+        server: '{{ .cluster }}'
         namespace: '{{ .environment }}'
       syncPolicy:
         automated:

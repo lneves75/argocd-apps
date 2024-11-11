@@ -37,7 +37,7 @@ spec:
           valueFiles:
           - https://raw.githubusercontent.com/lneves75/webapp/{{ .head_sha }}/helm/values.yaml
       destination:
-        server: https://kubernetes.default.svc
+        server: https://192.168.67.3:8443
         namespace: preview
       syncPolicy:
         automated:
