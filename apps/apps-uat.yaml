@@ -14,6 +14,8 @@ spec:
   template:
     metadata:
       name: '{{ name }}-{{ environment }}'
+      labels:
+        version: '{{ tag }}'
     spec:
       project: '{{ project }}'
       source:
