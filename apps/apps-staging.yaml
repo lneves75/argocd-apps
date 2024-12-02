@@ -23,6 +23,7 @@ spec:
         targetRevision: '{{ chart.version }}'
         path: '.'
         helm:
+          releaseName: '{{ name }}'
           parameters:
             - name: image.tag
               value: '{{ tag }}'
