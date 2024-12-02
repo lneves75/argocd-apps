@@ -5,5 +5,5 @@ environment: uat
 namespace: uat
 cluster: mini3
 tag: d652f35f0aec515d062790e8188491b6213c3b2f
-chart.version: v2
+chart.version: HEAD
 valueFiles: https://raw.githubusercontent.com/lneves75/webapp/refs/heads/master/helm/values.yaml
