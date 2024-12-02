@@ -5,5 +5,5 @@ environment: production
 namespace: production
 cluster: mini4
 tag: b477634da49df01e2df6929d4a9edca0a3638df1
-chart.version: HEAD
+chart.version: v2
 valueFiles: https://raw.githubusercontent.com/lneves75/webapp/refs/heads/master/helm/values.yaml
