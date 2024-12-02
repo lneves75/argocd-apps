@@ -20,6 +20,7 @@ spec:
       project: '{{ project }}'
       source:
         repoURL: https://github.com/lneves75/helm-chart.git
+        targetRevision: '{{ chart.version }}'
         path: '.'
         helm:
           parameters:
