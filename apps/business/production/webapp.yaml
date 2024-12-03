@@ -4,6 +4,6 @@ project: default
 environment: production
 namespace: production
 cluster: mini4
-tag: b477634da49df01e2df6929d4a9edca0a3638df1
+tag: 39aa19b1e9bb28e9b720fb15dfb40a380186f687
 chartVersion: v2
 valueFiles: https://raw.githubusercontent.com/lneves75/webapp/refs/heads/master/helm/values.yaml
