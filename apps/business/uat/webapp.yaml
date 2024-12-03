@@ -4,6 +4,6 @@ project: default
 environment: uat
 namespace: uat
 cluster: mini3
-tag: d652f35f0aec515d062790e8188491b6213c3b2f
+tag: 39aa19b1e9bb28e9b720fb15dfb40a380186f687
 chartVersion: v2
 valueFiles: https://raw.githubusercontent.com/lneves75/webapp/refs/heads/master/helm/values.yaml
