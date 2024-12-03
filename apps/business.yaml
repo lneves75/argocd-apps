@@ -2,36 +2,38 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: apps-production
+  name: business
   namespace: argocd
 spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
   generators:
     - git:
         repoURL: https://github.com/lneves75/argocd-apps.git
-        revision: master
+        revision: HEAD
         files:
-          - path: "apps/production/"
+        - path: apps/**/*.yaml
   template:
     metadata:
-      name: '{{ name }}-{{ environment }}'
+      name: '{{ .name }}-{{ .path.path }}'
       labels:
-        version: '{{ tag }}'
+        version: '{{ .tag }}'
     spec:
-      project: '{{ project }}'
+      project: '{{ .project }}'
       source:
         repoURL: https://github.com/lneves75/helm-chart.git
-        targetRevision: '{{ chart.version }}'
+        targetRevision: '{{ .chart.version }}'
         path: '.'
         helm:
-          releaseName: '{{ name }}'
+          releaseName: '{{ .name }}'
           parameters:
             - name: image.tag
-              value: '{{ tag }}'
+              value: '{{ .tag }}'
           valueFiles:
-            - '{{ valueFiles }}'
+            - '{{ .valueFiles }}'
       destination:
-        name: '{{ cluster }}'
-        namespace: '{{ namespace }}'
+        name: '{{ .cluster }}'
+        namespace: '{{ .namespace }}'
       syncPolicy:
         automated:
           prune: true
@@ -41,7 +43,7 @@ spec:
           - Validate=false
           - CreateNamespace=true
           - PrunePropagationPolicy=foreground
-          - PruneLast=true
+          - PruneLast=false
         retry:
           limit: 5
           backoff:
