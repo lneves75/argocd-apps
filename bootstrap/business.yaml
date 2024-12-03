@@ -1,44 +1,39 @@
+---
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: webapp-preview
+  name: business
   namespace: argocd
 spec:
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
   generators:
-  - pullRequest:
-      github:
-        # The GitHub organization or user.
-        owner: lneves75
-        # The Github repository
-        repo: webapp
-        # Labels is used to filter the PRs that you want to target. (optional)
-        labels:
-        - built
-        - preview
-      requeueAfterSeconds: 1800
+    - git:
+        repoURL: https://github.com/lneves75/argocd-apps.git
+        revision: HEAD
+        files:
+          - path: apps/business/
   template:
     metadata:
-      name: webapp-{{.number}}
-      namespace: argocd
+      name: '{{ .name }}-{{ .environment }}'
       labels:
-        version: '{{ .head_sha }}'
+        version: '{{ .tag }}'
     spec:
-      project: default
+      project: '{{ .project }}'
       source:
         repoURL: https://github.com/lneves75/helm-chart.git
-        path: "."
-        targetRevision: master
+        targetRevision: '{{ .chartVersion }}'
+        path: '.'
         helm:
+          releaseName: '{{ .name }}'
           parameters:
             - name: image.tag
-              value: '{{ .head_sha }}'
+              value: '{{ .tag }}'
           valueFiles:
-          - https://raw.githubusercontent.com/lneves75/webapp/{{ .head_sha }}/helm/values.yaml
+            - '{{ .valueFiles }}'
       destination:
-        server: https://192.168.67.3:8443
-        namespace: preview
+        name: '{{ .cluster }}'
+        namespace: '{{ .namespace }}'
       syncPolicy:
         automated:
           prune: true
@@ -48,11 +43,10 @@ spec:
           - Validate=false
           - CreateNamespace=true
           - PrunePropagationPolicy=foreground
-          - PruneLast=true
+          - PruneLast=false
         retry:
           limit: 5
           backoff:
             duration: 5s
             factor: 2
             maxDuration: 3m
-
