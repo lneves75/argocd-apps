@@ -10,7 +10,7 @@ spec:
   generators:
     - git:
         repoURL: https://github.com/lneves75/argocd-apps.git
-        revision: v2
+        revision: HEAD
         files:
           - path: apps/business/
   template:
