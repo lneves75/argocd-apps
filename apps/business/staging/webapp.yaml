@@ -4,6 +4,6 @@ project: default
 environment: staging
 namespace: staging
 cluster: mini2
-tag: f2b909dcd3d054447e7ba00b001cabe42a2528ed
+tag: 39aa19b1e9bb28e9b720fb15dfb40a380186f687
 chartVersion: v2
 valueFiles: https://raw.githubusercontent.com/lneves75/webapp/refs/heads/master/helm/values.yaml
