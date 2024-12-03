@@ -12,7 +12,7 @@ spec:
         repoURL: https://github.com/lneves75/argocd-apps.git
         revision: HEAD
         files:
-        - path: apps/**/*.yaml
+        - path: apps/**/*
   template:
     metadata:
       name: '{{ .name }}-{{ .path.path }}'
