@@ -1,0 +1,55 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: system
+  namespace: argocd
+spec:
+  goTemplate: true
+  generators:
+    - matrix:
+        generators:
+          - git:
+              repoURL: https://github.com/lneves75/argocd-apps.git
+              revision: support-system
+              files:
+                - path: apps/system/
+          - clusters:
+              selector:
+                matchLabels:
+                  argocd.argoproj.io/secret-type: cluster
+                  environment: '{{ .environment }}'
+                  domain: '{{ .domain }}'
+  template:
+    metadata:
+      name: '{{ .name }}'
+      labels:
+        version: '{{ .tag }}'
+    spec:
+      project: '{{ .project }}'
+      source:
+        repoURL: '{{ .repoURL }}'
+        chart: '{{ .chart }}'
+        targetRevision: '{{ .targetRevision }}'
+        helm:
+          values:
+            - '{{ .values }}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{ .namespace }}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+          allowEmpty: false
+        syncOptions:
+          - Validate=false
+          - CreateNamespace=true
+          - PrunePropagationPolicy=foreground
+          - PruneLast=true
+        retry:
+          limit: 5
+          backoff:
+            duration: 5s
+            factor: 2
+            maxDuration: 3m
