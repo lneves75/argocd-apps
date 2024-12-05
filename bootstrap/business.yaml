@@ -6,23 +6,30 @@ metadata:
   namespace: argocd
 spec:
   goTemplate: true
-  goTemplateOptions: ["missingkey=error"]
   generators:
-    - git:
-        repoURL: https://github.com/lneves75/argocd-apps.git
-        revision: HEAD
-        files:
-          - path: apps/business/
+    - matrix:
+        generators:
+          - git:
+              repoURL: https://github.com/lneves75/argocd-apps.git
+              revision: HEAD
+              files:
+                - path: apps/business/
+          - clusters:
+              selector:
+                matchLabels:
+                  argocd.argoproj.io/secret-type: cluster
+                  environment: '{{ .environment }}'
+                  domain: '{{ .domain }}'
   template:
     metadata:
-      name: '{{ .name }}-{{ .environment }}'
+      name: '{{ .name }}'
       labels:
         version: '{{ .tag }}'
     spec:
       project: '{{ .project }}'
       source:
         repoURL: https://github.com/lneves75/helm-chart.git
-        targetRevision: '{{ .chartVersion }}'
+        targetRevision: '{{ .chartVersion | default "v2" }}'
         path: '.'
         helm:
           releaseName: '{{ .name }}'
@@ -32,7 +39,7 @@ spec:
           valueFiles:
             - '{{ .valueFiles }}'
       destination:
-        name: '{{ .cluster }}'
+        server: https://kubernetes.default.svc
         namespace: '{{ .namespace }}'
       syncPolicy:
         automated:
@@ -43,7 +50,7 @@ spec:
           - Validate=false
           - CreateNamespace=true
           - PrunePropagationPolicy=foreground
-          - PruneLast=false
+          - PruneLast=true
         retry:
           limit: 5
           backoff:

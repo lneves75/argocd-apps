@@ -3,7 +3,6 @@ name: webapp
 project: default
 environment: staging
 namespace: staging
-cluster: mini2
+domain: digital
 tag: 04f0e9ecc0f3aecbec6d0a982a6ec665149a28fa
-chartVersion: v2
 valueFiles: https://raw.githubusercontent.com/lneves75/webapp/refs/heads/master/helm/values.yaml
