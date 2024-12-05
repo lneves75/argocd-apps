@@ -6,7 +6,6 @@ metadata:
   namespace: argocd
 spec:
   goTemplate: true
-  goTemplateOptions: ["missingkey=error"]
   generators:
     - matrix:
         generators:
@@ -30,7 +29,7 @@ spec:
       project: '{{ .project }}'
       source:
         repoURL: https://github.com/lneves75/helm-chart.git
-        targetRevision: '{{ .chartVersion | default v2 }}'
+        targetRevision: '{{ .chartVersion | default "v2" }}'
         path: '.'
         helm:
           releaseName: '{{ .name }}'
