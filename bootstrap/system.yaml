@@ -19,8 +19,7 @@ spec:
               selector:
                 matchLabels:
                   argocd.argoproj.io/secret-type: cluster
-                  environment: '{{ .environment }}'
-                  domain: '{{ .domain }}'
+                  cluster: '{{ .cluster }}'
   template:
     metadata:
       name: '{{ .name }}'

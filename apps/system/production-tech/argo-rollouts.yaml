@@ -1,7 +1,7 @@
 ---
 name: argo-rollouts
 project: default
-environment: staging
+environment: production
 namespace: argo-rollouts
 domain: tech
 repoURL: https://argoproj.github.io/argo-helm
