@@ -12,8 +12,7 @@ configs:
     - name: local
       server: https://kubernetes.default.svc
       labels:
-        environment: staging
-        domain: tech
+        cluster: staging-tech
       annotations: {}
       config:
         tlsClientConfig:

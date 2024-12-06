@@ -12,6 +12,7 @@ spec:
           - git:
               repoURL: https://github.com/lneves75/argocd-apps.git
               revision: multiple-versions
+              pathParamPrefix: "whatever"
               files:
                 - path: apps/system/
           - clusters:

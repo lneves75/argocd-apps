@@ -12,8 +12,7 @@ configs:
     - name: local
       server: https://kubernetes.default.svc
       labels:
-        environment: production
-        domain: tech
+        cluster: production-tech
       annotations: {}
       config:
         tlsClientConfig:

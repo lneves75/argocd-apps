@@ -12,8 +12,7 @@ configs:
     local:
       server: https://kubernetes.default.svc
       labels:
-        environment: production
-        domain: google
+        cluster: production-google
       annotations: {}
       config:
         tlsClientConfig:
