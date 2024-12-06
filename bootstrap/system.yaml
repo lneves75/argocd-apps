@@ -24,7 +24,7 @@ spec:
     metadata:
       name: '{{ .name }}'
       labels:
-        version: '{{ .tag }}'
+        version: '{{ .targetRevision }}'
     spec:
       project: '{{ .project }}'
       source:
@@ -32,8 +32,7 @@ spec:
         chart: '{{ .chart }}'
         targetRevision: '{{ .targetRevision }}'
         helm:
-          values:
-            - '{{ .values }}'
+          values: '{{ .values }}'
       destination:
         server: https://kubernetes.default.svc
         namespace: '{{ .namespace }}'
