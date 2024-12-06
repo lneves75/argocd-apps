@@ -11,7 +11,7 @@ spec:
         generators:
           - git:
               repoURL: https://github.com/lneves75/argocd-apps.git
-              revision: HEAD
+              revision: multiple-versions
               files:
                 - path: apps/business/
           - clusters:

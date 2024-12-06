@@ -1,0 +1,24 @@
+global:
+  logging:
+    format: json
+
+configs:
+  cm:
+    exec.enabled: true
+    statusbadge.enabled: true
+  params:
+    server.insecure: true
+  clusterCredentials:
+    local:
+      server: https://kubernetes.default.svc
+      labels:
+        environment: production
+        domain: google
+      annotations: {}
+      config:
+        tlsClientConfig:
+          insecure: false
+
+
+notifications:
+  enabled: false

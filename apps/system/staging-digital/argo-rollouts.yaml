@@ -3,7 +3,7 @@ name: argo-rollouts
 project: default
 environment: staging
 namespace: argo-rollouts
-domain: digital
+domain: tech
 repoURL: https://argoproj.github.io/argo-helm
 chart: argo-rollouts
 targetRevision: 2.31.0
