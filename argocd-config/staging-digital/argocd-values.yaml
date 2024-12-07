@@ -1,13 +1,10 @@
-global:
-  logging:
-    format: json
+chartVersion: 5.41.0
 
 configs:
   cm:
-    exec.enabled: true
-    statusbadge.enabled: true
-  params:
-    server.insecure: true
+    ui.bannercontent: "Welcome to staging-digital"
+    ui.bannerpermanent: "true"
+    ui.bannerposition: "top"
   clusterCredentials:
     - name: local
       server: https://kubernetes.default.svc
@@ -17,6 +14,3 @@ configs:
       config:
         tlsClientConfig:
           insecure: false
-
-notifications:
-  enabled: false

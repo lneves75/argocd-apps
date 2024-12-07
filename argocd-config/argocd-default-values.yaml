@@ -1,0 +1,16 @@
+global:
+  logging:
+    format: json
+
+configs:
+  cm:
+    exec.enabled: true
+    statusbadge.enabled: true
+  params:
+    server.insecure: true
+
+  secret:
+    argocdServerAdminPassword: "$2a$10$uGOjA6mV9Nfv2FMl1e32ZetSEu1HIMkjJ1t5GcJ9164jtHY2ea.ku"
+
+notifications:
+  enabled: false
