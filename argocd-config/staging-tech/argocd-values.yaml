@@ -1,0 +1,22 @@
+global:
+  logging:
+    format: json
+
+configs:
+  cm:
+    exec.enabled: true
+    statusbadge.enabled: true
+  params:
+    server.insecure: true
+  clusterCredentials:
+    - name: local
+      server: https://kubernetes.default.svc
+      labels:
+        cluster: staging-tech
+      annotations: {}
+      config:
+        tlsClientConfig:
+          insecure: false
+
+notifications:
+  enabled: false
