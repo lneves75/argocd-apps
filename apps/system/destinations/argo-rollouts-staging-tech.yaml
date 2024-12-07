@@ -1,0 +1,5 @@
+---
+project: default
+cluster: staging-tech
+namespace: argo-rollouts
+targetRevision: 2.31.0

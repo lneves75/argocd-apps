@@ -1,0 +1,8 @@
+---
+project: default
+cluster: production-tech
+namespace: argo-rollouts
+targetRevision: 2.31.0
+values: |-
+  dashboard:
+    enabled: true

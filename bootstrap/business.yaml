@@ -9,17 +9,26 @@ spec:
   generators:
     - matrix:
         generators:
-          - git:
-              repoURL: https://github.com/lneves75/argocd-apps.git
-              revision: HEAD
-              pathParamPrefix: "whatever"
-              files:
-                - path: apps/business/
+          - matrix:
+              generators:
+                - git:
+                    repoURL: https://github.com/lneves75/argocd-apps.git
+                    revision: multi-cluster
+                    pathParamPrefix: "apps"
+                    files:
+                      - path: apps/business/*.yaml
+                - git:
+                    repoURL: https://github.com/lneves75/argocd-apps.git
+                    revision: multi-cluster
+                    pathParamPrefix: "destinations"
+                    files:
+                      - path: apps/business/destinations/{{ .name }}-*.yaml
           - clusters:
               selector:
                 matchLabels:
                   argocd.argoproj.io/secret-type: cluster
                   cluster: '{{ .cluster }}'
+
   template:
     metadata:
       name: '{{ .name }}'
