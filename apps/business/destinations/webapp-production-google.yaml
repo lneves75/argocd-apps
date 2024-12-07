@@ -1,0 +1,4 @@
+---
+project: default
+cluster: production-google
+namespace: production
