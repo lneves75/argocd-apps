@@ -2,5 +2,5 @@ name: webapp
 project: default
 cluster: staging-digital
 namespace: staging
-tag: staging-54
-values: https://raw.githubusercontent.com/lneves75/webapp/refs/tags/staging-54/helm
+tag: staging-55
+values: https://raw.githubusercontent.com/lneves75/webapp/refs/tags/staging-55/helm
