@@ -1,7 +1,5 @@
----
 name: webapp
 project: default
 cluster: staging-digital
 namespace: staging
-tag: 4705c6e7986b64026d2afaa15f9774f809ec7537
-valueFiles: https://raw.githubusercontent.com/lneves75/webapp/refs/heads/master/helm/values.yaml
+values: https://raw.githubusercontent.com//refs/tags/staging-53/helm
